@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/layout_con"
+              >
+<!--餐厅菜品分类item-->
+    <TextView
+        android:padding="18dp"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:text="热销菜品"
+        android:id="@+id/tv_restaurant_name"
+        android:textSize="16sp"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_click_tip"
+        android:background="@color/top_color"
+        android:layout_alignParentLeft="true"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

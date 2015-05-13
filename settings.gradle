@@ -1,0 +1,3 @@
+include ':app', ':AndroidImageSlider-master', ':SMSSDK', ':segmented'
+project(':segmented').projectDir = new File('android-segmented-control-master/build.gradle')
+include ':library'
