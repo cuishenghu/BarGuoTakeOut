@@ -129,6 +129,10 @@
             android:name=".activity.ZhaoShangJiaMeng"
             android:label="@string/title_activity_zhao_shang_jia_meng" >
         </activity>
+        <activity
+            android:name=".activity.ChengPinActivity"
+            android:label="@string/title_activity_cheng_pin" >
+        </activity>
     </application>
 
 </manifest>
