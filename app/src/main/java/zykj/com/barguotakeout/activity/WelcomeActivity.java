@@ -4,37 +4,97 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import zykj.com.barguotakeout.R;
 
-public class WelcomeActivity extends ActionBarActivity {
+public class WelcomeActivity extends Activity implements
+        OnViewChangeListener, OnClickListener {
+    private MyScrollLayout mScrollLayout;
+
+    private ImageView[] mImageViews;
+
+    private int mViewCount;
+
+    private int mCurSel;
+
+    /**
+     * Activity对象 *
+     */
+    public static Activity MY_ACTIVITY;
+
+    private SharedPreferences shared;
+    private SharedPreferences.Editor editor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scroll_main);
+        shared = getSharedPreferences("setting", 0);
+        editor = shared.edit();
+
+
+        boolean isFirstRun = shared.getBoolean("isFirstRun", true);
+
+		/*if (!isFirstRun) {
+            Intent it = new Intent(this, MyActivity.class);
+			startActivity(it);
+			finish();
+		}*/
+        MY_ACTIVITY = this;
+
+        init();
     }
 
+    private void init() {
+        mScrollLayout = (MyScrollLayout) findViewById(R.id.ScrollLayout);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_welcome, menu);
-        return true;
-    }
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.llayout);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        mViewCount = mScrollLayout.getChildCount();
+        mImageViews = new ImageView[mViewCount];
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        for (int i = 0; i < mViewCount; i++) {
+            mImageViews[i] = (ImageView) linearLayout.getChildAt(i);
+            mImageViews[i].setEnabled(true);
+            mImageViews[i].setOnClickListener(this);
+            mImageViews[i].setTag(i);
         }
 
-        return super.onOptionsItemSelected(item);
+        mScrollLayout.setPageSize(mImageViews.length);
+        mCurSel = 0;
+        mImageViews[mCurSel].setEnabled(false);
+
+        mScrollLayout.SetOnViewChangeListener(this);
+    }
+
+    private void setCurPoint(int index) {
+        if (index < 0 || index > mViewCount - 1 || mCurSel == index) {
+            return;
+        }
+
+        mImageViews[mCurSel].setEnabled(true);
+        mImageViews[index].setEnabled(false);
+        mScrollLayout.setPosition(index);
+        mCurSel = index;
+    }
+
+    @Override
+    public void OnViewChange(int view) {
+        setCurPoint(view);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int pos = (Integer) (v.getTag());
+        setCurPoint(pos);
+        mScrollLayout.snapToScreen(pos);
     }
 }
