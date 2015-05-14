@@ -8,5 +8,6 @@
     <string name="indextitle">自动定位</string>
     <string name="title_activity_donhua_main">DonhuaMainActivity</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_zhao_shang_jia_meng">ZhaoShangJiaMeng</string>
 
 </resources>

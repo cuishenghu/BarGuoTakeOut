@@ -125,6 +125,10 @@
             android:name=".activity.WelcomeActivity"
             android:label="@string/title_activity_welcome" >
         </activity>
+        <activity
+            android:name=".activity.ZhaoShangJiaMeng"
+            android:label="@string/title_activity_zhao_shang_jia_meng" >
+        </activity>
     </application>
 
 </manifest>
