@@ -6,7 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ import zykj.com.barguotakeout.model.FoodType;
 import zykj.com.barguotakeout.model.Goods;
 import zykj.com.barguotakeout.model.GoodsModel;
 import zykj.com.barguotakeout.model.OrderPaper;
+import zykj.com.barguotakeout.view.BuyCarDialog;
 import zykj.com.barguotakeout.view.OrderList;
 
 /**
@@ -162,9 +165,9 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
         ic_bycar.setBackgroundResource(R.drawable.black_circle);
         hasGood=false;
     }
-//加载底部菜单栏
+    //加载底部菜单栏
     public void RenderBottomMenu(){
-        if(hasGood || orderPaper.getTotalNum()==0){
+        if(hasGood){
             return;
         }
         AppLog.e(TAG, "renderBottomMenu");
@@ -249,19 +252,17 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
                         (int)getResources().getDimension(R.dimen.bottom_order_height));
                 break;
             case R.id.btn_buy:
-                //点击购买按钮
+                /*点击购买按钮*/
                 if(orderPaper.getTotalNum()<=0){
                     ToastUTil.shortT(getActivity(),"购物车中还有没商品");
                     return;
                 }
                 if(TextUtils.isEmpty(Mapplication.getModel().getUsername())){
-                    //还没有登录 弹出对话框立即登录
+                    /*还没有登录 弹出对话框立即登录*/
                     ToastUTil.shortT(getActivity(),"请先登录");
                     return;
                 }else{
-                    /**
-                     * 确认订单
-                     */
+                    /*确认订单*/
                     startActivity(BuyActivity.newIntent(getActivity(),orderPaper));
                 }
                 break;
@@ -274,23 +275,36 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
         }
     }
 
+    /**
+     * 加载购物车
+     * @param goodnum
+     */
     private void initPopWindow(String goodnum) {
         View view= LayoutInflater.from(getActivity()).inflate(R.layout.dialog_buy_car,null);
         TextView currentNum = (TextView)view.findViewById(R.id.tv_goods_num);
-        OrderList ol_order= (OrderList)view.findViewById(R.id.all_buy_goods);
+        BuyCarDialog buy_order= (BuyCarDialog)view.findViewById(R.id.all_buy_goods);
         TextView clearAll = (TextView)view.findViewById(R.id.clear_all_buy);
-        clearAll.setOnClickListener(this);
-        if(orderPaper!=null){
-            ol_order.setMap(orderPaper.getMap());
-        }
+        clearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                orderPaper.clear();
+                popupWindow.dismiss();
+                ic_bycar.setVisibility(View.VISIBLE);
+                goodsAdapter.notifyDataSetChanged();
+                addGood();
+            }
+        });
+        if(orderPaper!=null){buy_order.setMap(orderPaper, goodsAdapter,currentNum);}
         currentNum.setText(goodnum);
         currentNum.setVisibility(View.VISIBLE);
+        currentNum.addTextChangedListener(getTextWatcher(currentNum));
         popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 //消失时
                 content.setAlpha(1.0f);
+                tv_goodnum.setText(orderPaper.getTotalNum()+"");
                 ic_bycar.setVisibility(View.VISIBLE);
                 tv_goodnum.setVisibility(View.VISIBLE);
             }
@@ -301,7 +315,33 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
     }
+    /*同步购物车价格*/
+    private TextWatcher getTextWatcher(TextView currentNum){
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                /*判断购物车是否为空*/
+                if(orderPaper.getTotalNum() == 0){
+                    popupWindow.dismiss();
+                    ic_bycar.setVisibility(View.VISIBLE);
+                    resetBottomMenu();
+                }else{
+                    tv_total.setText(String.format("共￥%s", orderPaper.getTotalPrice()));
+                }
+            }
+        };
+    }
+
+    /**
+     * 菜单列表"+","-"点击事件
+     * @param price
+     */
     @Override
     public void add(GoodsModel price) { addGood(); }
 

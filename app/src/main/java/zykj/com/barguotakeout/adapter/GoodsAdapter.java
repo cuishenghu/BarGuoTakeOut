@@ -113,6 +113,7 @@ public class GoodsAdapter extends BaseAdapter {
         holder.jian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Goods cGood = paper.getMap().get(model.getGoodsid());
                 if(good!=null){
                     paper.jianGood(good);
                 }
