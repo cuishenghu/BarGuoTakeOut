@@ -16,6 +16,12 @@ public class Goods implements Parcelable{
 
     private int count=0;
 
+    private int position;
+
+    public int getPosition() {return position; }
+
+    public void setPosition(int position) { this.position = position; }
+
     public String getPrice() {
         return price;
     }
@@ -53,7 +59,8 @@ public class Goods implements Parcelable{
     }
 
     public boolean delete(){
-        if(count==0 || count <0){
+        if(count<=1){
+            count=0;
             return false;
         }else{
             count=count-1;

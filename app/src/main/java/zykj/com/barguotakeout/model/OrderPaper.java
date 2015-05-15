@@ -61,11 +61,19 @@ public class OrderPaper implements Parcelable{
     public synchronized void jianGood(Goods good){
         if(map!=null){
            if( map.get(good.getGoodsid())!=null){
+               if(good.getCount()!=0)
+                   totalNum=totalNum-1;
                if( !good.delete()){
                    map.remove(good.getGoodsid());
                }
-               totalNum=totalNum==0?0:totalNum-1;
             }
+        }
+    }
+
+    public synchronized void addGood(Goods good){
+        if (map.get(good.getGoodsid())!=null){
+            good.add();
+            totalNum=totalNum+1;
         }
     }
 
@@ -85,15 +93,6 @@ public class OrderPaper implements Parcelable{
         goods.add();
         totalNum=totalNum+1;
         return goods;
-    }
-
-    public synchronized void deleteGood(GoodsModel good){
-        if (map.get(good.getGoodsid())!=null){
-            if(!map.get(good.getGoodsid()).delete()){
-                map.remove(good.getGoodsid());
-            }
-            totalNum=totalNum==0?0:totalNum-1;
-        }
     }
 
     public synchronized Goods dealGoodModel(GoodsModel goodsModel){
@@ -118,6 +117,12 @@ public class OrderPaper implements Parcelable{
             total=total+pric;
         }
         return String.valueOf(total);
+    }
+
+    public void clear(){
+        totalPrice = 0;
+        resid=0;totalNum=0;
+        map.clear();
     }
 
     @Override
