@@ -1,8 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">巴国外卖</string>
 
+    <string name="app_name">巴国外卖</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="indextitle">自动定位</string>
+    <string name="title_activity_donhua_main">DonhuaMainActivity</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_zhao_shang_jia_meng">ZhaoShangJiaMeng</string>
+    <string name="title_activity_cheng_pin">ChengPinActivity</string>
+
 </resources>

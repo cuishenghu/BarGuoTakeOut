@@ -47,7 +47,13 @@ public class FindFragment extends CommonLoadFragment{
     private String[] shenghuos=new String[]{"赶集","有缘","搜狐视频","游戏","电子书"};
     private int[] shenghuosics=new int[]{R.mipmap.ic_ganji,R.mipmap.ic_youyuan,R.mipmap.ic_souhushipin,R.mipmap.ic_youxi,R.mipmap.ic_dianzishu};
     private String[] shenghuosd=new String[]{
-            "http://linyi.ganji.com/","http://www.youyuan.com/","http://tv.sohu.com/","http://www.qq.com/","http://www.ifeng.com/"
+            "http://linyi.ganji.com/","http://www.youyuan.com/","http://tv.sohu.com/","http://android.d.cn/","http://www.qidian.com//"
+    };
+
+    private String[] chaxuns=new String[]{"去哪儿","火车票","汽车违章","快递","彩票开奖"};
+    private int[] chaxunsics=new int[]{R.mipmap.ic_qunaer,R.mipmap.ic_huochepiao,R.mipmap.ic_qicheweizhang,R.mipmap.ic_kuaidi,R.mipmap.ic_caipiao};
+    private String[] chaxunsd=new String[]{
+            "http://www.qunar.com/","http://www.12306.cn/","http://www.ip138.com/weizhang.htm","http://www.kuaidi100.com/","http://baidu.lecai.com/"
     };
 
     @Override
@@ -75,6 +81,10 @@ public class FindFragment extends CommonLoadFragment{
         GridView gv_shenghuo= (GridView) getView().findViewById(R.id.gv_find_shenghuo);
         gv_shenghuo.setAdapter(new GridIcAdapter(getActivity(),shenghuos,shenghuosics));
         gv_shenghuo.setOnItemClickListener(new FindItemClick(shenghuosd));
+
+        GridView gv_chaxun = (GridView)getView().findViewById(R.id.gv_find_chaxun);
+        gv_chaxun.setAdapter(new GridIcAdapter(getActivity(),chaxuns,chaxunsics));
+        gv_chaxun.setOnItemClickListener(new FindItemClick(chaxunsd));
     }
 
     private void initWeather() {

@@ -1,131 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/content_background_color"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content_background_color"
+    android:orientation="vertical">
+
     <RelativeLayout
-        android:clickable="true"
         android:id="@+id/top_bar"
-        android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_height"
         android:background="@drawable/blank_bottom_devide"
-        >
+        android:clickable="true"
+        android:padding="2dp">
+
         <ImageView
             android:id="@+id/iv_locat"
-            android:padding="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/index_ic_locat"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/index_title"
-            android:layout_centerVertical="true"
-            />
+            android:padding="6dp"
+            android:src="@mipmap/index_ic_locat" />
+
         <TextView
-            android:layout_centerVertical="true"
             android:id="@+id/index_title"
             style="@style/TitleTextTheme"
-            android:layout_centerInParent="true"
-            android:text="@string/indextitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/indextitle" />
+
         <ImageView
             android:id="@+id/local_btn"
-            android:layout_margin="3dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/index_title"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/index_ic_pull"/>
+            android:layout_centerVertical="true"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/index_title"
+            android:src="@mipmap/index_ic_pull" />
     </RelativeLayout>
-     <LinearLayout
-         android:id="@+id/ll_find_top"
-         android:layout_margin="10dp"
-         android:background="#FFF"
-         android:orientation="horizontal"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:padding="10dp"
-         android:gravity="center_vertical"
-         >
-        <TextView
-            android:id="@+id/tv_find_wendu"
-            android:textSize="32sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tv_find_weather"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-         <View
-             android:layout_marginRight="4dp"
-             android:layout_marginLeft="4dp"
-             android:layout_width="1dp"
-             android:layout_height="match_parent"
-             android:background="@color/gray"></View>
-          <TextView
-              android:id="@+id/tv_find_city"
-              android:textColor="@color/top_color"
-              android:textSize="24sp"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
-         </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
-            android:textColor="@color/bottom_tab_color"
-            android:text="资讯"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <GridView
-            android:id="@+id/gv_find_zixun"
-            android:horizontalSpacing="8dp"
-            android:numColumns="5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            </GridView>
 
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
-            android:textColor="@color/bottom_tab_color"
-            android:text="购物"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <GridView
-            android:id="@+id/gv_find_gouwu"
-            android:horizontalSpacing="8dp"
-            android:numColumns="5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </GridView>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
-            android:textColor="@color/bottom_tab_color"
-            android:text="生活"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <GridView
-            android:id="@+id/gv_find_shenghuo"
-            android:horizontalSpacing="8dp"
-            android:numColumns="5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </GridView>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_find_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#FFF"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
+                <TextView
+                    android:id="@+id/tv_find_wendu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="32sp" />
+
+                <TextView
+                    android:id="@+id/tv_find_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/gray"></View>
+
+                <TextView
+                    android:id="@+id/tv_find_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_color"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="资讯"
+                    android:textColor="@color/bottom_tab_color"
+                    android:textSize="16sp" />
+
+                <GridView
+                    android:id="@+id/gv_find_zixun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="5"></GridView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="购物"
+                    android:textColor="@color/bottom_tab_color"
+                    android:textSize="16sp" />
+
+                <GridView
+                    android:id="@+id/gv_find_gouwu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="5"></GridView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="生活"
+                    android:textColor="@color/bottom_tab_color"
+                    android:textSize="16sp" />
+
+                <GridView
+                    android:id="@+id/gv_find_shenghuo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="5"></GridView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="查询"
+                    android:textColor="@color/bottom_tab_color"
+                    android:textSize="16sp" />
+
+                <GridView
+                    android:id="@+id/gv_find_chaxun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="5">
+
+                </GridView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
