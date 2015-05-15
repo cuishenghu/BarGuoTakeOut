@@ -21,7 +21,6 @@ public abstract class AbstractHttpHandler extends AsyncHttpResponseHandler{
         try {
             String responseString=new String(responseBody, HTTP.UTF_8);
             JSONObject json = (JSONObject) JSON.parse(responseString);
-            AppLog.i("response",responseString);
             onJsonSuccess(json);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

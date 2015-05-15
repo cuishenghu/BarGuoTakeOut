@@ -36,7 +36,7 @@ public class UrlContants {
 
     public static final String AllORDER="getorders.php";
 
-    public static final String COMMIT_ORDER="commitorder.php";
+    public static final String COMMIT_ORDER="server/Home/Order/api_commitOrder";
 
     public static final String TOTAL_PRICE="gettotalprice.php";
 
@@ -49,6 +49,8 @@ public class UrlContants {
     public static  final String MODIFY_PWD="resetpwd.php";
 
     public static final String ORDERDETAIL="getorderdetail.php";
+
+    public static final String PAY="ping++/pay.php";
 
     public static String getUrl(String token){
         if(token==null || token.equals("")){

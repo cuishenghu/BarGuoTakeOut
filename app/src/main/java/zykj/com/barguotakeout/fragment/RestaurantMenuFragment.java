@@ -22,7 +22,9 @@ import android.widget.TextView;
 
 import com.loopj.android.http.RequestParams;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.Inflater;
 
 import zykj.com.barguotakeout.Mapplication;
@@ -35,8 +37,10 @@ import zykj.com.barguotakeout.adapter.GoodsAdapter;
 import zykj.com.barguotakeout.http.EntityHandler;
 import zykj.com.barguotakeout.http.HttpUtil;
 import zykj.com.barguotakeout.model.FoodType;
+import zykj.com.barguotakeout.model.Goods;
 import zykj.com.barguotakeout.model.GoodsModel;
 import zykj.com.barguotakeout.model.OrderPaper;
+import zykj.com.barguotakeout.view.OrderList;
 
 /**
  * Created by ss on 15-4-23. 餐厅菜单详情 左边是一个listview 右边显示
@@ -160,7 +164,7 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
     }
 //加载底部菜单栏
     public void RenderBottomMenu(){
-        if(hasGood){
+        if(hasGood || orderPaper.getTotalNum()==0){
             return;
         }
         AppLog.e(TAG, "renderBottomMenu");
@@ -179,7 +183,7 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
     public void addGood(){
         RenderBottomMenu();
         tv_goodnum.setText(String.valueOf(orderPaper.getTotalNum()));
-        tv_total.setText(String.format("共￥%s",orderPaper.getTotalPrice()));
+        tv_total.setText(String.format("共￥%s", orderPaper.getTotalPrice()));
         if(orderPaper.getTotalNum()==0){
             resetBottomMenu();
         }
@@ -235,7 +239,10 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
         switch (v.getId()){
             case R.id.ic_buycar:
                //使用popwindow
-                initPopWindow();
+                if(orderPaper.getTotalNum()==0){ return; }
+                initPopWindow(orderPaper.getTotalNum()+"");
+                ic_bycar.setVisibility(View.GONE);
+                tv_goodnum.setVisibility(View.GONE);
                 content.setAlpha(0.1f);
                 //popupWindow.showAsDropDown(content);
                 popupWindow.showAtLocation(bottom_view, Gravity.BOTTOM,0,
@@ -257,38 +264,47 @@ public class RestaurantMenuFragment extends  CommonFragment implements AdapterVi
                      */
                     startActivity(BuyActivity.newIntent(getActivity(),orderPaper));
                 }
-
-
+                break;
+            case R.id.clear_all_buy:
+                TextView tv_goods_num = (TextView) getView().findViewById(R.id.tv_goods_num);//菜单标题文字
+                tv_goods_num.setText("0");
+                orderPaper.getMap().clear();
+                popupWindow.dismiss();
                 break;
         }
     }
 
-    private void initPopWindow() {
+    private void initPopWindow(String goodnum) {
         View view= LayoutInflater.from(getActivity()).inflate(R.layout.dialog_buy_car,null);
-        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        TextView currentNum = (TextView)view.findViewById(R.id.tv_goods_num);
+        OrderList ol_order= (OrderList)view.findViewById(R.id.all_buy_goods);
+        TextView clearAll = (TextView)view.findViewById(R.id.clear_all_buy);
+        clearAll.setOnClickListener(this);
+        if(orderPaper!=null){
+            ol_order.setMap(orderPaper.getMap());
+        }
+        currentNum.setText(goodnum);
+        currentNum.setVisibility(View.VISIBLE);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 //消失时
                 content.setAlpha(1.0f);
+                ic_bycar.setVisibility(View.VISIBLE);
+                tv_goodnum.setVisibility(View.VISIBLE);
             }
         });
-
         ColorDrawable cd = new ColorDrawable(-0000);
         popupWindow.setAnimationStyle(R.style.MyDialogStyleBottom);
         popupWindow.setBackgroundDrawable(cd);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
-
     }
 
     @Override
-    public void add(GoodsModel price) {
-        addGood();
-    }
+    public void add(GoodsModel price) { addGood(); }
 
     @Override
-    public void delete(GoodsModel price) {
-        addGood();
-    }
+    public void delete(GoodsModel price) { addGood(); }
 }

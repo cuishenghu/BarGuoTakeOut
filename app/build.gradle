@@ -33,4 +33,8 @@ dependencies {
     compile project(':SMSSDK')
     compile project(':library')
     compile 'com.android.support:appcompat-v7:22.1.1'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
+    compile files('libs/libpingpp.jar')
 }

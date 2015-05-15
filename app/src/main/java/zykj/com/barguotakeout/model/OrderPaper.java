@@ -2,6 +2,8 @@ package zykj.com.barguotakeout.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,7 +64,7 @@ public class OrderPaper implements Parcelable{
                if( !good.delete()){
                    map.remove(good.getGoodsid());
                }
-               totalNum=totalNum-1;
+               totalNum=totalNum==0?0:totalNum-1;
             }
         }
     }
@@ -73,14 +75,13 @@ public class OrderPaper implements Parcelable{
             map=new HashMap<String ,Goods>();
         }
 
-         if(map.get(model.getGoodsid())!=null){
-                goods =map.get(model.getGoodsid());
-
-            }else{
-                 goods = dealGoodModel(model);
-                 map.put(goods.getGoodsid(),goods);
-                goods=map.get(model.getGoodsid());
-            }
+        if(map.get(model.getGoodsid())!=null){
+            goods =map.get(model.getGoodsid());
+        }else{
+            goods = dealGoodModel(model);
+            map.put(goods.getGoodsid(),goods);
+            goods=map.get(model.getGoodsid());
+        }
         goods.add();
         totalNum=totalNum+1;
         return goods;
@@ -91,7 +92,7 @@ public class OrderPaper implements Parcelable{
             if(!map.get(good.getGoodsid()).delete()){
                 map.remove(good.getGoodsid());
             }
-            totalNum=totalNum-1;
+            totalNum=totalNum==0?0:totalNum-1;
         }
     }
 

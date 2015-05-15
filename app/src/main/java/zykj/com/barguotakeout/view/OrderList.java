@@ -53,6 +53,7 @@ public class OrderList extends LinearLayout {
         while (iterator.hasNext()){
             Object key= iterator.next();
             Goods goods= (Goods) key;
+            if(goods.getCount()==0){ continue; }
             AppLog.i("orderlist",goods.toString());
             RelativeLayout rl_orderitem= (RelativeLayout) inflater.inflate(R.layout.rl_buy_orderitem,null);
             TextView tv_goodname= (TextView) rl_orderitem.findViewById(R.id.tv_buy_goodname);
@@ -66,5 +67,4 @@ public class OrderList extends LinearLayout {
             this.addView(rl_orderitem);
         }
     }
-
 }

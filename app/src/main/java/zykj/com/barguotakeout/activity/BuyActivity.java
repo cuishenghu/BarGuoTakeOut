@@ -22,9 +22,11 @@ import org.apache.http.Header;
 import java.util.Collection;
 import java.util.Map;
 
+import zykj.com.barguotakeout.Mapplication;
 import zykj.com.barguotakeout.R;
 import zykj.com.barguotakeout.Utils.AppLog;
 import zykj.com.barguotakeout.Utils.ToastUTil;
+import zykj.com.barguotakeout.fragment.CommonProgressFragment;
 import zykj.com.barguotakeout.http.HttpErrorHandler;
 import zykj.com.barguotakeout.http.HttpUtil;
 import zykj.com.barguotakeout.model.Goods;
@@ -68,23 +70,24 @@ public class BuyActivity extends CommonActivity implements View.OnClickListener 
     }
 
     private void initView() {
-            
-        et_mobile = (EditText) findViewById(R.id.et_buy_mobile);
-        et_address = (EditText) findViewById(R.id.et_buy_address);
-        et_message = (EditText) findViewById(R.id.et_buy_message);
-        btn_buy = (Button) findViewById(R.id.btn_buy_buy);
-        rb_zhifubao = (RadioButton) findViewById(R.id.rb_buy_zhifubao);
-        rb_daofu = (RadioButton) findViewById(R.id.rb_pay_daofu);
-        tv_total = (TextView) findViewById(R.id.tv_buy_total);
-        pb_load = (ProgressBar) findViewById(R.id.pb_buy_totalloading);
+        et_mobile = (EditText) findViewById(R.id.et_buy_mobile);//手机号
+        et_address = (EditText) findViewById(R.id.et_buy_address);//送餐地址
+        et_message = (EditText) findViewById(R.id.et_buy_message);//留言
+        btn_buy = (Button) findViewById(R.id.btn_buy_buy);//提交订单
+        rb_zhifubao = (RadioButton) findViewById(R.id.rb_buy_zhifubao);///支付宝支付
+        rb_daofu = (RadioButton) findViewById(R.id.rb_pay_daofu);//餐到付款
+        tv_total = (TextView) findViewById(R.id.tv_buy_total);//合计
+        pb_load = (ProgressBar) findViewById(R.id.pb_buy_totalloading);//合计加载
         rb_daofu.setOnClickListener(this);
         rb_zhifubao.setOnClickListener(this);
 
-        OrderList ol_order= (OrderList) findViewById(R.id.ol_buy_orderlist);
+        OrderList ol_order= (OrderList) findViewById(R.id.ol_buy_orderlist);//订单列表
         btn_buy.setOnClickListener(this);
         if(paper!=null){
             ol_order.setMap(paper.getMap());
         }
+        et_mobile.setText(Mapplication.getModel().getUsername());
+        et_address.setText(Mapplication.getModel().getAddress());
     }
 
     public void back(View v){
@@ -95,16 +98,52 @@ public class BuyActivity extends CommonActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_buy_buy:
-                String mobile=et_mobile.getText().toString().trim();
-                String address=et_address.getText().toString().trim();
-                String msg=et_message.getText().toString().trim();
+                final String mobile=et_mobile.getText().toString().trim();
+                final String address=et_address.getText().toString().trim();
+                final String msg=et_message.getText().toString().trim();
 
                 if (TextUtils.isEmpty(mobile) || TextUtils.isEmpty(address)){
                     ToastUTil.shortT(BuyActivity.this,"清先输入手机号和地址");
                     return;
                 }
-                startActivity(ConfirmOrder.newIntent(this,mobile,address,paper,payType,msg,price));
-                //进入确认订单界面
+                RequestParams params=new RequestParams();
+                Map<String,Goods> map=paper.getMap();
+                Collection<Goods> values = map.values();
+                JSONArray array= (JSONArray) JSONArray.toJSON(values);
+                params.add("resid",String.valueOf(paper.getResid()));
+                params.add("orderprice",String.valueOf(price));
+                params.add("userid", Mapplication.getModel().getUserid());
+                params.add("address",address);
+                params.add("remark",msg);
+                params.add("payway",String.valueOf(payType));
+                params.add("phonenum",String.valueOf(mobile));
+                params.add("goodsdetail",array.toJSONString());
+                params.add("realname",Mapplication.getModel().getUsername());//获取真实姓名
+                params.add("username",Mapplication.getModel().getUsername());
+
+                CommonProgressFragment.getInstance("正在提交订单").show(getSupportFragmentManager(),"progress");
+                HttpUtil.updateOrder(new HttpErrorHandler() {
+                    @Override
+                    public void onRecevieSuccess(JSONObject json) {
+                        //ToastUTil.shortT(BuyActivity.this,"已成功提交订单");
+                        JSONObject jsonObject = json.getJSONObject("data");
+                        String ordernum = jsonObject.getString("ordernum");
+                        CommonProgressFragment.disappear();
+                        startActivity(ConfirmOrder.newIntent(BuyActivity.this, mobile, address, paper, payType, msg, price, ordernum));
+                    }
+
+                    @Override
+                    public void onRecevieFailed(String status, JSONObject json) {
+                        CommonProgressFragment.disappear();
+                        ToastUTil.shortT(BuyActivity.this, json.get("msg").toString());
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        CommonProgressFragment.disappear();
+                        ToastUTil.shortT(BuyActivity.this, "网络连接失败,请检查后重试");
+                    }
+                }, params);
                 break;
             case R.id.rb_buy_zhifubao:
                 //在线交易

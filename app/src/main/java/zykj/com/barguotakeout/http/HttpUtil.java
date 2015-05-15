@@ -88,6 +88,10 @@ public class HttpUtil {
         client.post(UrlContants.getUrl(UrlContants.DRAWLOTTERY), params, handler);
     }
 
+    public static void pay(AsyncHttpResponseHandler handler, RequestParams params){
+        client.post(UrlContants.getUrl(UrlContants.PAY), params, handler);
+    }
+
     /**
      * 获取指定城市的天气信息
      * @param code

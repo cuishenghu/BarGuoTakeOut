@@ -25,11 +25,21 @@
             android:id="@+id/index_title"
             style="@style/TitleTextTheme"
             android:layout_centerInParent="true"
-            android:text="确认订单"
+            android:text="支付订单"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
     </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/content_background_color"
+        android:layout_marginTop="10dp"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -143,9 +153,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <RadioButton
-                android:id="@+id/rb_pay_daofu"
+                android:id="@+id/rb_buy_wechat"
                 android:button="@drawable/rbtn_red_selector"
-                android:text="餐到付款"
+                android:text="维信支付"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </RadioGroup>
@@ -155,9 +165,11 @@
         android:textColor="#FFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="提交订单"
+        android:text="确认支付"
         android:layout_margin="10dp"
         android:textSize="16sp"
         android:background="@drawable/gray_angle_shape"
         />
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
