@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion 16
     buildToolsVersion "19.1.0"
@@ -15,4 +14,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+}
+
+dependencies {
+    compile files('D:/LssAndroid/BarGuoTakeOut/app/libs/alipaysdk.jar')
+    compile files('D:/LssAndroid/BarGuoTakeOut/app/libs/android-support-v4.jar')
 }

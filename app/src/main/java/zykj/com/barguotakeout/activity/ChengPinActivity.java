@@ -1,40 +1,46 @@
 package zykj.com.barguotakeout.activity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import zykj.com.barguotakeout.R;
 
-public class ChengPinActivity extends ActionBarActivity {
+/**
+ * lss 2015/5/15 诚聘
+ */
+public class ChengPinActivity  extends CommonActivity implements View.OnClickListener {
+    ImageView im_chengpin_back;
+    Button bt_chengpin_tijiao;
+    EditText et_chengpin_xiangfa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheng_pin);
+        initView();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_cheng_pin, menu);
-        return true;
+    private void initView() {
+        im_chengpin_back = (ImageView)findViewById(R.id.im_chengpin_back);
+        bt_chengpin_tijiao = (Button)findViewById(R.id.bt_chengpin_tijiao);
+        et_chengpin_xiangfa = (EditText)findViewById(R.id.et_chengpin_xiangfa);
+        im_chengpin_back.setOnClickListener(this);
+        bt_chengpin_tijiao.setOnClickListener(this);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.im_chengpin_back:
+                this.finish();
+                break;
+            case R.id.bt_chengpin_tijiao:
+                //提交按钮操作（todo）
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                break;
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

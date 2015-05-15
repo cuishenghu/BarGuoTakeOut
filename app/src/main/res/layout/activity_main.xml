@@ -57,7 +57,7 @@
             app:bg_icon="@mipmap/bottom_tab_4"
             android:layout_width="1dp"
             android:layout_weight="1"
-            app:bg_text="我"
+            app:bg_text="我的"
             android:layout_height="wrap_content"
             android:padding="5dp"
             app:bg_color="@color/tab_color"

@@ -124,4 +124,8 @@ public class HttpUtil {
     public static void getOrderStatus(AsyncHttpResponseHandler handler,RequestParams params) {
         client.post(UrlContants.getUrl(UrlContants.getUrl(UrlContants.ORDERDETAIL)),params,handler);
     }
+
+    public static void getCompanyInfo(AsyncHttpResponseHandler handler) {
+        client.post(UrlContants.getUrl(UrlContants.CompanyIno),handler);
+    }
 }

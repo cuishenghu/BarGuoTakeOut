@@ -1,9 +1,5 @@
 package zykj.com.barguotakeout.activity;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,11 +39,11 @@ public class WelcomeActivity extends Activity implements
 
         boolean isFirstRun = shared.getBoolean("isFirstRun", true);
 
-		/*if (!isFirstRun) {
-            Intent it = new Intent(this, MyActivity.class);
+		if (!isFirstRun) {
+            Intent it = new Intent(this, MainActivity.class);
 			startActivity(it);
 			finish();
-		}*/
+		}
         MY_ACTIVITY = this;
 
         init();

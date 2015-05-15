@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:orientation="vertical"
+    tools:context="zykj.com.barguotakeout.activity.GongSiJianJieActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/top_color"
+        android:clickable="true"
+        android:padding="2dp">
+
+        <ImageView
+            android:id="@+id/im_gsjj_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_back_selector"
+            android:padding="10dp"
+            android:src="@mipmap/ic_actionbar_back" />
+
+        <TextView
+            style="@style/TitleTextTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="公司简介"/>
+    </RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="#fff"
+        android:gravity="top"
+        android:text="@string/text_gongsijianjie"/>
+
+</LinearLayout>
