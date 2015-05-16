@@ -133,5 +133,9 @@ public class HttpUtil {
         client.post(UrlContants.getUrl(UrlContants.ORDERDETAIL),params,handler);
     }
 
+    public static void getCompanyInfo(AsyncHttpResponseHandler handler) {
+        client.post(UrlContants.getUrl(UrlContants.COMPANYINFO),handler);
+    }
+
 
 }
