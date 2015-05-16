@@ -11,6 +11,9 @@ import android.view.animation.Animation.AnimationListener;
 
 import zykj.com.barguotakeout.R;
 
+/**
+ * lss 2015/5/14 动画
+ */
 public class DonhuaMainActivity extends Activity {
     private Context context;
 

@@ -50,6 +50,8 @@ public class UrlContants {
 
     public static final String ORDERDETAIL="getorderdetail.php";
 
+    public static final String CompanyIno="server/Home/My/apiget_basicdetail.php";
+
     public static final String PAY="ping++/pay.php";
 
     public static final String CANCELORDER="server/Home/Order/api_cancelOrder";

@@ -1,8 +1,8 @@
 package zykj.com.barguotakeout.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,11 +22,18 @@ import org.apache.http.Header;
 
 import zykj.com.barguotakeout.Mapplication;
 import zykj.com.barguotakeout.R;
-import zykj.com.barguotakeout.Utils.AppLog;
+import zykj.com.barguotakeout.Utils.ToastUTil;
+import zykj.com.barguotakeout.activity.BaGuoBiActivity;
+import zykj.com.barguotakeout.activity.ChengPinActivity;
+import zykj.com.barguotakeout.activity.GongSiJianJieActivity;
+import zykj.com.barguotakeout.activity.GuanwangActivity;
 import zykj.com.barguotakeout.activity.LoginActivity;
 import zykj.com.barguotakeout.activity.MCountActivity;
 import zykj.com.barguotakeout.activity.MyOrderActivity;
 import zykj.com.barguotakeout.activity.SettingActivity;
+import zykj.com.barguotakeout.activity.ShouCangActivity;
+import zykj.com.barguotakeout.activity.TouSuChuLiActivity;
+import zykj.com.barguotakeout.activity.ZhaoShangJiaMengActivity;
 import zykj.com.barguotakeout.http.HttpErrorHandler;
 import zykj.com.barguotakeout.http.HttpUtil;
 import zykj.com.barguotakeout.http.UrlContants;
@@ -46,6 +53,13 @@ public class MeFragment extends CommonLoadFragment implements View.OnClickListen
     private RelativeLayout rl_me;
     private User user;
     private RelativeLayout rl_set;
+    private RelativeLayout rl_me_zhaoshangjiameng;
+    private RelativeLayout rl_me_chengpin;
+    private LinearLayout ll_me_baguobi;
+    private LinearLayout ll_me_shoucang;
+    private RelativeLayout rl_me_guanwang;
+    private RelativeLayout rl_me_gongsijianjie;
+    private RelativeLayout rl_me_tousuchuli;
 
     public static final int LOGOUT=5;
 
@@ -75,10 +89,24 @@ public class MeFragment extends CommonLoadFragment implements View.OnClickListen
         tv_mobile = (TextView) getView().findViewById(R.id.tv_me_mobile);
         rl_me = (RelativeLayout) getView().findViewById(R.id.rl_me_top);
         rl_set = (RelativeLayout) getView().findViewById(R.id.rl_me_setting);
+        rl_me_zhaoshangjiameng = (RelativeLayout)getView().findViewById(R.id.rl_me_zhaoshangjiameng);
+        rl_me_chengpin = (RelativeLayout)getView().findViewById(R.id.rl_me_chengpin);
+        ll_me_baguobi = (LinearLayout)getView().findViewById(R.id.ll_me_baguobi);
+        ll_me_shoucang = (LinearLayout)getView().findViewById(R.id.ll_me_shoucang);
+        rl_me_guanwang = (RelativeLayout)getView().findViewById(R.id.rl_me_guanwang);
+        rl_me_gongsijianjie = (RelativeLayout)getView().findViewById(R.id.rl_me_gongsijianjie);
+        rl_me_tousuchuli = (RelativeLayout)getView().findViewById(R.id.rl_me_tousuchuli);
         rl_me.setOnClickListener(this);
         ll_order.setOnClickListener(this);
         tv.setOnClickListener(this);
         rl_set.setOnClickListener(this);
+        rl_me_zhaoshangjiameng.setOnClickListener(this);
+        rl_me_chengpin.setOnClickListener(this);
+        ll_me_baguobi.setOnClickListener(this);
+        ll_me_shoucang.setOnClickListener(this);
+        rl_me_guanwang.setOnClickListener(this);
+        rl_me_gongsijianjie.setOnClickListener(this);
+        rl_me_tousuchuli.setOnClickListener(this);
     }
 
     @Override
@@ -118,7 +146,80 @@ public class MeFragment extends CommonLoadFragment implements View.OnClickListen
                 //登录界面
                 startActivityForResult(new Intent(getActivity(), LoginActivity.class), 0);
                 break;
+            case R.id.rl_me_zhaoshangjiameng:
+                //招商加盟
+                Intent intent2 = new Intent(getActivity(), ZhaoShangJiaMengActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.rl_me_chengpin:
+                //诚聘
+                Intent intent3 = new Intent(getActivity(), ChengPinActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.ll_me_baguobi:
+                //巴国币
+                Intent intent4 = new Intent(getActivity(), BaGuoBiActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.ll_me_shoucang:
+                //收藏
+                Intent intent5 = new Intent(getActivity(), ShouCangActivity.class);
+                startActivity(intent5);
+                break;
+            case R.id.rl_me_guanwang:
+                //官网
+//                Uri uri = Uri.parse("www.baidu.com");
+//                Intent it = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(it);
+//                ToastUTil.shortT(getActivity(),"网络连接失败1");
+//                getInfo();
+//                ToastUTil.shortT(getActivity(),"网络连接失败2");
+//                Intent intent6 = new Intent(getActivity(), GuanwangActivity.class);
+//                startActivity(intent6);
+                break;
+            case R.id.rl_me_gongsijianjie:
+                //公司简介
+                Intent intent7 = new Intent(getActivity(), GongSiJianJieActivity.class);
+                startActivity(intent7);
+                break;
+            case R.id.rl_me_tousuchuli:
+                //投诉处理
+                Intent intent8 = new Intent(getActivity(), TouSuChuLiActivity.class);
+                startActivity(intent8);
+                break;
         }
+    }
+
+    public String getInfo(){
+
+        ToastUTil.shortT(getActivity(),"网络连接失败3");
+//        RequestParams par=new RequestParams();
+//        par.add("type","websitelink");
+        //par.add("type","business");
+        //par.add("type","contactphone");
+//        ToastUTil.shortT(getActivity(),par.toString()+"----");
+        HttpUtil.getCompanyInfo(new HttpErrorHandler() {
+            @Override
+            public void onRecevieSuccess(JSONObject json) {
+//                ToastUTil.shortT(MeFragment.this, "登录失败," + json.get("msg").toString())
+
+                ToastUTil.shortT(getActivity(), "网络连接失败4");
+            }
+
+            @Override
+            public void onRecevieFailed(String status, JSONObject json) {
+
+                ToastUTil.shortT(getActivity(), "网络连接失败5");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                ToastUTil.shortT(getActivity(), "网络连接失败6");
+            }
+        });
+
+        return null;
     }
 
     public void setTopView(){

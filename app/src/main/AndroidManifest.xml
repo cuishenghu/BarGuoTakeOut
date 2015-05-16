@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="zykj.com.barguotakeout" >
+    package="zykj.com.barguotakeout" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -123,7 +123,7 @@
             android:name="com.pingplusplus.android.PaymentActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 微信支付注册-->
+        <!-- 微信支付注册 -->
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -140,7 +140,7 @@
             android:exported="false"
             android:screenOrientation="behind" />
 
-        <!--高德地图项目配置-->
+        <!-- 高德地图项目配置 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="905f49050897c504e22e16f3c7287025" />
@@ -159,12 +159,32 @@
             android:label="@string/title_activity_welcome" >
         </activity>
         <activity
-            android:name=".activity.ZhaoShangJiaMeng"
+            android:name=".activity.ZhaoShangJiaMengActivity"
             android:label="@string/title_activity_zhao_shang_jia_meng" >
         </activity>
         <activity
             android:name=".activity.ChengPinActivity"
             android:label="@string/title_activity_cheng_pin" >
+        </activity>
+        <activity
+            android:name=".activity.BaGuoBiActivity"
+            android:label="@string/title_activity_ba_guo_bi" >
+        </activity>
+        <activity
+            android:name=".activity.ShouCangActivity"
+            android:label="@string/title_activity_shou_cang" >
+        </activity>
+        <activity
+            android:name=".activity.GuanwangActivity"
+            android:label="@string/title_activity_guanwang" >
+        </activity>
+        <activity
+            android:name=".activity.GongSiJianJieActivity"
+            android:label="@string/title_activity_gong_si_jian_jie" >
+        </activity>
+        <activity
+            android:name=".activity.TouSuChuLiActivity"
+            android:label="@string/title_activity_tou_su_chu_li" >
         </activity>
     </application>
 

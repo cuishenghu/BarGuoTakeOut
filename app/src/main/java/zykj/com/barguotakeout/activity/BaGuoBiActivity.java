@@ -7,19 +7,22 @@ import android.view.MenuItem;
 
 import zykj.com.barguotakeout.R;
 
-public class ZhaoShangJiaMeng extends ActionBarActivity {
+/**
+ * lss 2015/5/15 巴国币
+ */
+public class BaGuoBiActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zhao_shang_jia_meng);
+        setContentView(R.layout.activity_ba_guo_bi);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_zhao_shang_jia_meng, menu);
+        getMenuInflater().inflate(R.menu.menu_ba_guo_bi, menu);
         return true;
     }
 

@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.amap.api.location.AMapLocation;
@@ -315,5 +319,32 @@ public class MainActivity extends LocationActivity implements View.OnClickListen
                 }
                 break;
         }
+    }
+    // 退出操作
+    private boolean isExit = false;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isExit == false) {
+                isExit = true;
+                Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                        Toast.LENGTH_LONG).show();
+                Handler mHandler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        isExit = false;
+                    }
+                };
+                mHandler.sendEmptyMessageDelayed(0, 3000);
+                return true;
+            } else {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                return false;
+            }
+        }
+        return true;
     }
 }

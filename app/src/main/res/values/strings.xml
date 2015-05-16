@@ -10,5 +10,11 @@
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_activity_zhao_shang_jia_meng">ZhaoShangJiaMeng</string>
     <string name="title_activity_cheng_pin">ChengPinActivity</string>
+    <string name="title_activity_ba_guo_bi">BaGuoBiActivity</string>
+    <string name="title_activity_shou_cang">ShouCangActivity</string>
+    <string name="title_activity_guanwang">GuanwangActivity</string>
+    <string name="title_activity_gong_si_jian_jie">GongSiJianJieActivity</string>
+    <string name="title_activity_tou_su_chu_li">TouSuChuLiActivity</string>
+    <string name="text_gongsijianjie">"        公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司\n        简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"</string>
 
 </resources>

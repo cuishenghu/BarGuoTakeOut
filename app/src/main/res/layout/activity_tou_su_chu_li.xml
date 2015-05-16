@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:orientation="vertical"
+    tools:context="zykj.com.barguotakeout.activity.TouSuChuLiActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/top_color"
+        android:clickable="true"
+        android:padding="2dp">
+
+        <ImageView
+            android:id="@+id/im_tscl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_back_selector"
+            android:padding="10dp"
+            android:src="@mipmap/ic_actionbar_back" />
+
+        <TextView
+            style="@style/TitleTextTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="投诉"/>
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/et_tscl_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:lines="5"
+        android:gravity="top"
+        android:padding="10dip"
+        android:hint="我要投诉~"/>
+    <Button
+        android:id="@+id/bt_tscl_tijiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="立即提交"
+        android:background="#A0A0A0"
+        android:textColor="#fff"
+        android:padding="8dp"/>
+
+</LinearLayout>
