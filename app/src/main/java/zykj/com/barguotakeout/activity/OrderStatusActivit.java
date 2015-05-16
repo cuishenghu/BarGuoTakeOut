@@ -24,7 +24,6 @@ import java.io.UnsupportedEncodingException;
 
 import zykj.com.barguotakeout.R;
 import zykj.com.barguotakeout.Utils.AppLog;
-import zykj.com.barguotakeout.Utils.TimeCount;
 import zykj.com.barguotakeout.Utils.ToastUTil;
 import zykj.com.barguotakeout.http.HttpErrorHandler;
 import zykj.com.barguotakeout.http.HttpUtil;
@@ -419,7 +418,7 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
         @Override
         public void onClick(View view) {
             /*订单投诉*/
-            Intent complaintIntent = new Intent(OrderStatusActivit.this, ConfirmOrder.class);
+            Intent complaintIntent = new Intent(OrderStatusActivit.this, TouSuChuLiActivity.class);
             startActivity(complaintIntent);
         }
     }
