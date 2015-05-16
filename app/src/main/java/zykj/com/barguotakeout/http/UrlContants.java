@@ -52,6 +52,10 @@ public class UrlContants {
 
     public static final String PAY="ping++/pay.php";
 
+    public static final String CANCELORDER="server/Home/Order/api_cancelOrder";
+
+    public static final String CONFIRMORDER="server/Home/Order/api_ensureOrder";
+
     public static String getUrl(String token){
         if(token==null || token.equals("")){
             return BASE_URL;

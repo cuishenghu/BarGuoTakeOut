@@ -62,7 +62,7 @@ public class MyOderAdapter extends BaseAdapter {
         }
              Order order=list.get(position);
 
-             holder.iv_icon.setImageResource(R.mipmap.iv_default);
+            holder.iv_icon.setImageResource(R.mipmap.iv_default);
             if(order.getReslogo()!=null){
                 ImageLoader.getInstance().displayImage(order.getReslogo(),holder.iv_icon);
             }
@@ -96,16 +96,19 @@ public class MyOderAdapter extends BaseAdapter {
                 s="等待餐厅接单";
                 break;
             case 2:
-                s="正在配送";
+                s="美食制作中";
                 break;
             case 3:
                 s="交易成功";
                 break;
+            case 4:
+                s="正在配送";
+                break;
             case 7:
-                s="交易关闭";
+                s="订单取消";
                 break;
             case 8:
-                s="订单取消，等待退款";
+                s="等待退款";
                 break;
             case 9:
                 s="交易关闭";

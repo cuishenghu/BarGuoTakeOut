@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,6 +55,28 @@ public class BuyCarDialog extends LinearLayout{
         this.setBackgroundResource(R.drawable.gray_devide_bt);
         inflater = LayoutInflater.from(ctx);
     }
+
+    public void setMap(Map<String,Goods> maps){
+        Collection<Goods> c=maps.values();
+        Iterator iterator=c.iterator();
+        while (iterator.hasNext()){
+            Object key= iterator.next();
+            Goods goods= (Goods) key;
+            AppLog.i("orderlist", goods.toString());
+            RelativeLayout rl_orderitem= (RelativeLayout) inflater.inflate(R.layout.rl_buy_orderitem,null);
+            TextView tv_goodname= (TextView) rl_orderitem.findViewById(R.id.tv_buy_goodname);
+            TextView tv_price= (TextView) rl_orderitem.findViewById(R.id.tv_buy_price);
+            TextView tv_count= (TextView) rl_orderitem.findViewById(R.id.tv_buy_count);
+
+            tv_goodname.setText(goods.getGoodname());
+            tv_count.setText(String.format("x%d", goods.getCount()));
+            //计算价格
+            Double tPrice=goods.getCount()*Double.valueOf( goods.getPrice());
+            tv_price.setText(String.format("￥%.1f",tPrice));
+            this.addView(rl_orderitem);
+        }
+    }
+
     public void setMap(final OrderPaper paper, final GoodsAdapter goodsAdapter, final TextView currentNum){
         Map<String,Goods> maps = paper.getMap();
         Collection<Goods> c=maps.values();

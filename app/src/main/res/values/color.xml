@@ -17,4 +17,10 @@
     <color name="qianhui">#9F9F9F</color>
     <color name="greend">#23d029</color>
     <color name="yellow">#FFB516</color>
+    <color name="pink">#FDE7E3</color>
+    <color name="red">#FF0000</color>
+    <color name="line_gray">#E1E0DE</color>
+    <color name="font_gray">#F5F4F3</color>
+    <color name="font_black">#000000</color>
+    <color name="font_status">#7E7E7E</color>
 </resources>

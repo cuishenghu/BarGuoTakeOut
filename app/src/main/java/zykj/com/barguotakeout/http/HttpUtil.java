@@ -92,6 +92,14 @@ public class HttpUtil {
         client.post(UrlContants.getUrl(UrlContants.PAY), params, handler);
     }
 
+    public static void cancelOrder(AsyncHttpResponseHandler handler, RequestParams params){
+        client.post(UrlContants.getUrl(UrlContants.CANCELORDER), params, handler);
+    }
+
+    public static void confirmOrder(AsyncHttpResponseHandler handler, RequestParams params){
+        client.post(UrlContants.getUrl(UrlContants.CONFIRMORDER), params, handler);
+    }
+
     /**
      * 获取指定城市的天气信息
      * @param code
@@ -122,6 +130,8 @@ public class HttpUtil {
     }
 
     public static void getOrderStatus(AsyncHttpResponseHandler handler,RequestParams params) {
-        client.post(UrlContants.getUrl(UrlContants.getUrl(UrlContants.ORDERDETAIL)),params,handler);
+        client.post(UrlContants.getUrl(UrlContants.ORDERDETAIL),params,handler);
     }
+
+
 }
