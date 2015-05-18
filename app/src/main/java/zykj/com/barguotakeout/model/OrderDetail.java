@@ -25,6 +25,11 @@ public class OrderDetail implements Parcelable {
     private String updatetime;
     private String userid;
     private String wanttime;
+    private Boolean hasClocks;
+
+    public Boolean getHasClocks(){ return hasClocks; }
+
+    public void setHasClocks(Boolean hasClocks){ this.hasClocks = hasClocks; }
 
     public String getAddress() {
         return address;

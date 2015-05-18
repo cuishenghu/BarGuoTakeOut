@@ -172,6 +172,7 @@
         </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
+            android:id="@+id/tv_index_gift"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="58dp"

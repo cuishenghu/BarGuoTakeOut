@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +23,11 @@ import org.apache.http.Header;
 import org.apache.http.protocol.HTTP;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Timer;
 
 import zykj.com.barguotakeout.R;
 import zykj.com.barguotakeout.Utils.AppLog;
@@ -49,8 +56,11 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
     private View take_up_end,take_down_end;
     private RequestParams detailParams;
 
+    private AsyncHttpResponseHandler mHttpResponseHandler;
+    private Runnable myRunnable;
     public static final String CODE="ordernum";
     private String ordernum;
+    private Boolean hasClocks;
     private OrderDetail orderDetail;
     private JSONArray jsonArray;
 
@@ -156,8 +166,11 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
         order_address.setText("收餐地址："+detail.getAddress());
         order_next.setOnClickListener(new OnNextClickListener());
         orderphone.setOnClickListener(new OnPhoneClickListener());
-        String status = detail.getStatus();
-        switch (status){
+        renderOrderStatus(detail.getStatus());
+    }
+
+    private void renderOrderStatus(String detail){
+        switch (detail){
             case "0":
                 /*0->提交订单，等待付款*/
                 order_ok.setBackgroundResource(R.drawable.red_circle_order);
@@ -165,7 +178,7 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
                 orderText.setText("提交订单，等待付款");//订单状态
                 orderInfo.setVisibility(View.GONE);//订单信息(红色提醒)
                 order_all.setVisibility(View.VISIBLE);//总价
-                order_allPrice.setText("总价：" + detail.getOrderprice() + "元");
+                order_allPrice.setText("总价：" + orderDetail.getOrderprice() + "元");
                 status_info.setVisibility(View.VISIBLE);//计时模块
                 orderTimerText.setText("支付剩余时间");
                 timeerCount();//15分钟倒计时
@@ -231,7 +244,11 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
                 order_ok.setBackgroundResource(R.drawable.red_circle_order);
                 order_ok.setImageResource(R.mipmap.takeout_cancel);//订单状态图标
                 orderText.setText("订单取消，交易关闭");//订单状态
+                orderInfo.setVisibility(View.VISIBLE);
                 orderInfo.setText("  支付超时，你的订单已经取消");//订单信息(红色提醒)
+                order_allPrice.setVisibility(View.GONE);
+                status_info.setVisibility(View.GONE);
+                orderconfirm.setVisibility(View.GONE);
                 ordercancel.setText("订单投诉");
                 ordercancel.setOnClickListener(new OnLodgeClickListener());//订单投诉
                 take_up_three.setVisibility(View.GONE);
@@ -327,33 +344,7 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
         @Override
         public void onClick(View view) {
             /*取消订单*/
-            HttpUtil.cancelOrder(new AsyncHttpResponseHandler(){
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    try {
-                        String responseString=new String(responseBody, HTTP.UTF_8);
-                        JSONObject json = (JSONObject) JSON.parse(responseString);
-                        if("1".equals(json.getString("status"))){
-                            ToastUTil.shortT(OrderStatusActivit.this,"取消成功");
-                        }else{
-                            ToastUTil.shortT(OrderStatusActivit.this,json.getString("msg"));
-                        }
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    try {
-                        String responseString=new String(responseBody, HTTP.UTF_8);
-                        JSONObject json = (JSONObject) JSON.parse(responseString);
-                        ToastUTil.shortT(OrderStatusActivit.this,json.getString("msg"));
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            },detailParams);
+            HttpUtil.cancelOrder(httpResponseHandler(),detailParams);
         }
     }
     class OnPhoneClickListener implements View.OnClickListener{
@@ -424,13 +415,59 @@ public class OrderStatusActivit extends CommonActivity implements View.OnClickLi
     }
 
     private void timeerCount(){
-        new CountDownTimer(900000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                ordertime.setText(millisUntilFinished/60000+"分"+(millisUntilFinished/1000)%60+"秒");
-            }
-            public void onFinish() {
-                ordertime.setText("done!");
-            }
-        }.start();
+        if(myRunnable == null) {
+            final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("zh_CN"));
+            final Handler handler = new Handler();
+            myRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        long residueTime = (900000 - (new Date().getTime() - df.parse(orderDetail.getUpdatetime()).getTime())) / 1000;
+                        AppLog.e("residueTime*******************", residueTime + "");
+                        ordertime.setText(residueTime / 60 + "分" + residueTime % 60 + "秒");
+                        handler.postDelayed(this, 1000);
+                        if (residueTime < 0) {
+                            ordertime.setText("失败!");
+                            HttpUtil.cancelOrder(httpResponseHandler(), detailParams);
+                            handler.removeCallbacks(this);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            handler.post(myRunnable);
+        }
+    }
+
+    private AsyncHttpResponseHandler httpResponseHandler(){
+        if(mHttpResponseHandler == null) {
+            mHttpResponseHandler = new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        String responseString = new String(responseBody, HTTP.UTF_8);
+                        JSONObject json = (JSONObject) JSON.parse(responseString);
+                        JSONObject jsonObject = json.getJSONObject("data");
+                        ToastUTil.shortT(OrderStatusActivit.this, "取消成功");
+                        renderOrderStatus(jsonObject.getString("status"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    try {
+                        String responseString = new String(responseBody, HTTP.UTF_8);
+                        JSONObject json = (JSONObject) JSON.parse(responseString);
+                        ToastUTil.shortT(OrderStatusActivit.this, json.getString("msg"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+        }
+        return mHttpResponseHandler;
     }
 }

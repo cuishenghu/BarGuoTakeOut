@@ -17,4 +17,12 @@ public class ToastUTil {
     public synchronized static AlertDialog.Builder alertDialogBuilder(Context context){
         return new AlertDialog.Builder(context);
     }
+
+    public static void showToastText(Context context, String title, String msg, String button){
+        ToastUTil.alertDialogBuilder(context)
+                .setTitle(title)
+                .setMessage(msg)
+                .setPositiveButton(button,null)
+                .show();
+    }
 }

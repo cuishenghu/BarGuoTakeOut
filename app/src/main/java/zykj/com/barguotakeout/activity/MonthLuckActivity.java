@@ -62,7 +62,7 @@ public class MonthLuckActivity extends CommonActivity implements View.OnClickLis
     public void onClick(View view){
         if(TextUtils.isEmpty(userid)){
             //还没有登录 弹出对话框立即登录
-            showToastText(MonthLuckActivity.this, "提醒", "请先登录!", "确定");
+            ToastUTil.showToastText(MonthLuckActivity.this, "提醒", "请先登录!", "确定");
             return;
         }else{
             final RequestParams params=new RequestParams();
@@ -70,12 +70,12 @@ public class MonthLuckActivity extends CommonActivity implements View.OnClickLis
             HttpUtil.drawlottery(new HttpErrorHandler() {
                 @Override
                 public void onRecevieSuccess(JSONObject json) {
-                    showToastText(MonthLuckActivity.this, "抽奖详情", "你的抽奖号码为123456，抽奖结果将于5月31日公布，请注意查收。", "确定");
+                    ToastUTil.showToastText(MonthLuckActivity.this, "抽奖详情", "你的抽奖号码为123456，抽奖结果将于5月31日公布，请注意查收。", "确定");
                 }
 
                 @Override
                 public void onRecevieFailed(String status, JSONObject json) {
-                    showToastText(MonthLuckActivity.this, "提醒", json.getString("msg"), "确定");
+                    ToastUTil.showToastText(MonthLuckActivity.this, "提醒", json.getString("msg"), "确定");
                 }
 
                 @Override
@@ -86,16 +86,6 @@ public class MonthLuckActivity extends CommonActivity implements View.OnClickLis
         }
     }
 
-    public void back(View v){
-        finish();
-    }
-
-    private void showToastText(Context context, String title, String msg, String button){
-        ToastUTil.alertDialogBuilder(context)
-                .setTitle(title)
-                .setMessage(msg)
-                .setPositiveButton(button,null)
-                .show();
-    }
+    public void back(View v){ finish(); }
 
 }

@@ -16,6 +16,7 @@ public class SharedPreferenceUtils {
     private static final String USERID="userid";
     private static final String USERNAME="username";
     private static final String PASSWORD="password";
+    private static final String BAGUOBI="baguobi";
     private static final String ISFIRUSE="isfirst";
 
     private static final String LONGTITUDE="longtitude";//经度
@@ -85,7 +86,7 @@ public class SharedPreferenceUtils {
 
     }
     public double getLatitude(){
-      String la=  mSharedPreference.getString(LATITUDE,"0");
+        String la=  mSharedPreference.getString(LATITUDE,"0");
         return Double.valueOf(la);
     }
 
@@ -99,8 +100,14 @@ public class SharedPreferenceUtils {
 
     public String getUserid(){ return mSharedPreference .getString(USERID,""); }
 
+    public String getBaguobi(){ return mSharedPreference .getString(BAGUOBI,""); }
+
     public void setUserid(String userid){
         mEditor.putString(USERID,userid);
+        mEditor.commit();
+    }
+    public void setBaguobi(String bgb){
+        mEditor.putString(BAGUOBI,bgb);
         mEditor.commit();
     }
 }

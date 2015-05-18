@@ -85,6 +85,8 @@ public class LoginActivity extends CommonActivity implements View.OnClickListene
                         JSONObject jsonObject = json.getJSONObject("data");
                         String userid = jsonObject.getString("userid");
                         Mapplication.getModel().setUserid(userid);
+                        String baguobi = jsonObject.getString("baguobi");
+                        Mapplication.getModel().setBaguobi(baguobi);
                         ToastUTil.shortT(LoginActivity.this,"登录成功");
                         CommonProgressFragment.disappear();
                         setResult(RESULT_OK);

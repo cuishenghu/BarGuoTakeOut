@@ -115,12 +115,14 @@ public class IndexFragment extends CommonFragment implements View.OnClickListene
         RelativeLayout btn_order= (RelativeLayout) getView().findViewById(R.id.btn_order);
         RelativeLayout btn_luck= (RelativeLayout) getView().findViewById(R.id.btn_luck);
         RelativeLayout topbar= (RelativeLayout) getView().findViewById(R.id.top_bar);
+        RelativeLayout index_gift= (RelativeLayout) getView().findViewById(R.id.tv_index_gift);
         title = (TextView) getView().findViewById(R.id.index_title);
 
         btn_joke.setOnClickListener(this);
         btn_order.setOnClickListener(this);
         btn_luck.setOnClickListener(this);
         topbar.setOnClickListener(this);
+        index_gift.setOnClickListener(this);
 
     }
 
@@ -141,10 +143,16 @@ public class IndexFragment extends CommonFragment implements View.OnClickListene
                 startActivity(new Intent(getActivity(), MonthLuckActivity.class));
                 break;
             case R.id.top_bar:
+                //定位
                 startActivityForResult(new Intent(getActivity(), LocatActivity.class),LocatActivity.REQUESTCODE);
                 break;
             case R.id.btn_order:
+                //我要订外卖
                 startActivity(new Intent(getActivity(), OrderActivity.class));
+                break;
+            case R.id.tv_index_gift:
+                //巴国礼品站
+                //startActivity(new Intent(getActivity(), BaGuoGiftActivity.class));
                 break;
         }
     }
