@@ -60,6 +60,10 @@ public class UrlContants {
 
     public static final String COMPANYINFO="server/Home/My/apiget_basicdetail";
 
+    public static final String DUIBAURL="server/Home/User/api_getduibaurl";
+
+    public static final String BAGUORANK="getbaguorankcate.php";
+
     public static String getUrl(String token){
         if(token==null || token.equals("")){
             return BASE_URL;

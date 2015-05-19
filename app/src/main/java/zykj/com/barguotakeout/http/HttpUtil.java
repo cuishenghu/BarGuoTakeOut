@@ -137,5 +137,13 @@ public class HttpUtil {
         client.post(UrlContants.getUrl(UrlContants.COMPANYINFO),handler);
     }
 
+    public static void getduibaurl(AsyncHttpResponseHandler handler,RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.DUIBAURL),params,handler);
+    }
+
+    public static void getbaguoRank(AsyncHttpResponseHandler handler,RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.BAGUORANK),params,handler);
+    }
+
 
 }

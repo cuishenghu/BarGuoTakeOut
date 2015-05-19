@@ -1,9 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/top_bar"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/top_color">
+        <ImageView
+            android:onClick="back"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_actionbar_back"
+            android:background="@drawable/btn_back_selector"/>
+        <ImageView
+            android:id="@+id/iv_locat"
+            android:padding="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/index_ic_locat"
+            android:layout_toLeftOf="@+id/index_title"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/index_title"
+            style="@style/TitleTextTheme"
+            android:layout_centerInParent="true"
+            android:text="@string/indextitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/local_btn"
+            android:layout_margin="3dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/index_title"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/index_ic_pull"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:paddingBottom="4dp"
+        android:gravity="center_horizontal"
+        android:background="@color/top_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/radios"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:orientation="horizontal"
+            segmentedgroup:border_width="1dp"
+            segmentedgroup:corner_radius="20dp">
+            <RadioButton
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:padding="6dp"
+                android:id="@+id/radio_btn1"
+                android:layout_width="1dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="区域榜"
+                style="@style/RadioButton" />
+            <RadioButton
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:padding="6dp"
+                android:id="@+id/radio_btn2"
+                android:layout_width="1dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="新推荐"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frag_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 </LinearLayout>

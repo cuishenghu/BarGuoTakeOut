@@ -113,13 +113,9 @@
             android:name=".activity.OrderStatusActivit"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!-- 兑吧注册 -->
         <activity
-            android:name=".activity.BaGuoGiftActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name=".activity.GiftExchangeActivity"
+            android:name=".activity.CreditActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize" />
