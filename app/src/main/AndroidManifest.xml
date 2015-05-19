@@ -186,6 +186,18 @@
             android:name=".activity.TouSuChuLiActivity"
             android:label="@string/title_activity_tou_su_chu_li" >
         </activity>
+        <activity
+            android:name=".activity.WoDeShouHuoDiZhiActivity"
+            android:label="@string/title_activity_wo_de_shou_huo_di_zhi" >
+        </activity>
+        <activity
+            android:name=".activity.AddAddressActivity"
+            android:label="@string/title_activity_add_address" >
+        </activity>
+        <activity
+            android:name=".activity.EditAddressActivity"
+            android:label="@string/title_activity_edit_address" >
+        </activity>
     </application>
 
 </manifest>

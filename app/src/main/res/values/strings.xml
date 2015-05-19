@@ -16,5 +16,8 @@
     <string name="title_activity_gong_si_jian_jie">GongSiJianJieActivity</string>
     <string name="title_activity_tou_su_chu_li">TouSuChuLiActivity</string>
     <string name="text_gongsijianjie">"        公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司公司\n        简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"</string>
+    <string name="title_activity_wo_de_shou_huo_di_zhi">WoDeShouHuoDiZhiActivity</string>
+    <string name="title_activity_add_address">AddAddressActivity</string>
+    <string name="title_activity_edit_address">EditAddressActivity</string>
 
 </resources>

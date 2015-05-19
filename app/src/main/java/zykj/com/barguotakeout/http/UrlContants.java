@@ -54,6 +54,10 @@ public class UrlContants {
 
     public static final String PAY="ping++/pay.php";
 
+    public static final String MyAddress="server/Home/User/api_getaddress";
+
+    public static final String AddAddress="addaddress.php";
+
     public static String getUrl(String token){
         if(token==null || token.equals("")){
             return BASE_URL;

@@ -81,8 +81,8 @@
     <orderEntry type="jdk" jdkName="Android API 10 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="mframework" level="project" />
-    <orderEntry type="library" exported="" name="SMSSDK-1.1.9" level="project" />
     <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="SMSSDK-1.1.9" level="project" />
   </component>
 </module>
 

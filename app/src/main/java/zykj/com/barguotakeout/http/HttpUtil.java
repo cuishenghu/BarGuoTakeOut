@@ -128,4 +128,12 @@ public class HttpUtil {
     public static void getCompanyInfo(AsyncHttpResponseHandler handler) {
         client.post(UrlContants.getUrl(UrlContants.CompanyIno),handler);
     }
+
+    public static void getMyAddress(AsyncHttpResponseHandler handler,RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.MyAddress),params,handler);
+    }
+
+    public static void AddAddress(AsyncHttpResponseHandler handler,RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.AddAddress),params,handler);
+    }
 }

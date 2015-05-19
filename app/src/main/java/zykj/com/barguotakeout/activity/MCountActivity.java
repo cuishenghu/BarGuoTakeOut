@@ -53,6 +53,7 @@ public class MCountActivity extends CommonActivity implements View.OnClickListen
     private RoundImageView avatar;
     private String savepath;
     private RelativeLayout rl_modifypwd;
+    private RelativeLayout rv_count_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class MCountActivity extends CommonActivity implements View.OnClickListen
         avatar = (RoundImageView) findViewById(R.id.rv_count_avator);
         tv_username = (TextView) findViewById(R.id.tv_count_username);
         rl_modifypwd = (RelativeLayout) findViewById(R.id.rl_count_modyfipwd);
+        rv_count_address = (RelativeLayout) findViewById(R.id.rv_count_address);
         if(user.getUsername()!=null){
             tv_username.setText(user.getUsername());
           }
@@ -79,6 +81,7 @@ public class MCountActivity extends CommonActivity implements View.OnClickListen
         rl_avatar.setOnClickListener(this);
         rl_name.setOnClickListener(this);
         rl_modifypwd.setOnClickListener(this);
+        rv_count_address.setOnClickListener(this);
 
     }
 
@@ -119,6 +122,11 @@ public class MCountActivity extends CommonActivity implements View.OnClickListen
                 Intent intent=new Intent(MCountActivity.this,ModifyPwd.class);
                 intent.putExtra("userid",user.getUserid());
                 startActivityForResult(intent,4);
+                break;
+            case R.id.rv_count_address:
+                //我的地址
+                Intent itaddress = new Intent(MCountActivity.this,WoDeShouHuoDiZhiActivity.class);
+                startActivity(itaddress);
                 break;
         }
     }
