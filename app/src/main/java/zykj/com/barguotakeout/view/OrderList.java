@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,6 +50,24 @@ public class OrderList extends LinearLayout {
         this.setBackgroundResource(R.drawable.gray_devide_bt);
         inflater = LayoutInflater.from(ctx);
     }
+
+    public void setMap(JSONArray jsonArray){
+        for(int i = 0;i<jsonArray.size();i++){
+            JSONObject goods= jsonArray.getJSONObject(i);
+            RelativeLayout rl_orderitem= (RelativeLayout) inflater.inflate(R.layout.rl_buy_orderitem,null);
+            TextView tv_goodname= (TextView) rl_orderitem.findViewById(R.id.tv_buy_goodname);
+            TextView tv_price= (TextView) rl_orderitem.findViewById(R.id.tv_buy_price);
+            TextView tv_count= (TextView) rl_orderitem.findViewById(R.id.tv_buy_count);
+
+            tv_goodname.setText(goods.getString("goodname"));
+            tv_count.setText("x"+goods.getString("count"));
+            //计算价格
+            Double tPrice=Double.valueOf(goods.getString("count"))*Double.valueOf(goods.getString("price"));
+            tv_price.setText(String.format("￥%.1f",tPrice));
+            this.addView(rl_orderitem);
+        }
+    }
+
     public void setMap(Map<String,Goods> maps){
         Collection<Goods> c=maps.values();
         Iterator iterator=c.iterator();
@@ -55,9 +76,9 @@ public class OrderList extends LinearLayout {
             Goods goods= (Goods) key;
             if(goods.getCount()==0){ continue; }
             AppLog.i("orderlist",goods.toString());
-            RelativeLayout rl_orderitem= (RelativeLayout) inflater.inflate(R.layout.buy_car_orderitem,null);
+            RelativeLayout rl_orderitem= (RelativeLayout) inflater.inflate(R.layout.rl_buy_orderitem,null);
             TextView tv_goodname= (TextView) rl_orderitem.findViewById(R.id.tv_buy_goodname);
-            TextView tv_count= (TextView) rl_orderitem.findViewById(R.id.tv_buy_num);
+            TextView tv_count= (TextView) rl_orderitem.findViewById(R.id.tv_buy_count);
             TextView tv_price= (TextView) rl_orderitem.findViewById(R.id.tv_buy_price);
             tv_goodname.setText(goods.getGoodname());
             tv_count.setText(String.format("x%d", goods.getCount()));

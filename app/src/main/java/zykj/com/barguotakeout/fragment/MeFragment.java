@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,15 +126,22 @@ public class MeFragment extends CommonLoadFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        String userid = Mapplication.getModel().getUserid();
         switch (v.getId()){
             case R.id.ll_me_order:
-                //查看用户订单
-                startActivity(new Intent(getActivity(), MyOrderActivity.class));
+                if(TextUtils.isEmpty(userid)){
+                    //提醒用户登录
+                    ToastUTil.showToastText(getActivity(), "提醒", "请先登录!", "确定");
+                    return;
+                }else{
+                    //查看用户订单
+                    startActivity(new Intent(getActivity(), MyOrderActivity.class));
+                }
                 break;
             case R.id.rl_me_top:
                 //查看用户详情
                 Intent intent = new Intent(getActivity(), MCountActivity.class);
-                if(user != null && !TextUtils.isEmpty(Mapplication.getModel().getUsername())){
+                if(user != null && !TextUtils.isEmpty(userid)){
                     intent.putExtra("user",user);
                     startActivity(intent);
                 }
@@ -239,6 +247,7 @@ public class MeFragment extends CommonLoadFragment implements View.OnClickListen
                     //初始化头像 保存信息
                    JSONObject data=json.getJSONObject("data");
                    user=JSONObject.parseObject(data.toJSONString(),User.class);
+                    Log.e("user-----------------",data.toString());
                     if(user.getAvatar()!=null){
                     ImageLoader.getInstance().displayImage(UrlContants.getUrl(user.getAvatar()),rv_avator);}
                 }

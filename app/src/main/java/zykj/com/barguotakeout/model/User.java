@@ -14,6 +14,15 @@ public class User implements Serializable{
     private String email;
     private String birthday;
     private String gender;
+    private String baguobi;
+
+    public String getBaguobi() {
+        return baguobi;
+    }
+
+    public void setBaguobi(String baguobi) {
+        this.baguobi = baguobi;
+    }
 
     public String getUserid() {
         return userid;

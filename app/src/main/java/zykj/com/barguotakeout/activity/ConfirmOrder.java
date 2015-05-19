@@ -64,6 +64,7 @@ public class ConfirmOrder extends CommonActivity implements View.OnClickListener
     private RadioButton alipay;
     private Integer price;
     private String ordernum;
+    private String orderdetail;
 
 
     public static Intent newIntent(Context ctx,String mobile,String address,Parcelable paper,Integer payType,String msg,Integer price,String ordernum){
@@ -91,6 +92,7 @@ public class ConfirmOrder extends CommonActivity implements View.OnClickListener
         msg=intent.getStringExtra("msg");
         price=intent.getIntExtra("price", 0);
         ordernum=intent.getStringExtra("ordernum");
+        orderdetail=intent.getStringExtra("orderdetail");
         initView();
 
     }
@@ -119,6 +121,9 @@ public class ConfirmOrder extends CommonActivity implements View.OnClickListener
 
         if(paper!=null){
             list.setMap(paper.getMap());
+        }else{
+            JSONArray jsonArray = (JSONArray)JSON.parse(orderdetail);
+            list.setMap(jsonArray);
         }
 
         btn_buy.setOnClickListener(this);
@@ -139,8 +144,8 @@ public class ConfirmOrder extends CommonActivity implements View.OnClickListener
                 params.add("channel",channel);
                 params.add("amount",String.valueOf(price));
                 params.add("ordernum",ordernum);
-                params.add("subject",address);
-                params.add("body", msg);
+                params.add("subject","Foods");
+                params.add("body", "this is a pay for online");
                 HttpUtil.pay(mAsyncHttpResponseHandler, params);
                 break;
         }
@@ -205,10 +210,11 @@ public class ConfirmOrder extends CommonActivity implements View.OnClickListener
              */
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 Toast.makeText(this, result.equals("success")?"支付成功":"支付失败", Toast.LENGTH_SHORT).show();
-                if(result.equals("success")){
-                    //Intent intent = new Intent(ConfirmOrder.this,WoDoDingDanActivity.class);
+                if(result.equals("success")||result.equals("fail")){
+                    Intent intent = new Intent(ConfirmOrder.this,OrderStatusActivit.class);
+                    intent.putExtra(OrderStatusActivit.CODE,ordernum);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //startActivity(intent);
+                    startActivity(intent);
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Toast.makeText(this, "User canceled", Toast.LENGTH_SHORT).show();

@@ -54,6 +54,16 @@ public class UrlContants {
 
     public static final String PAY="ping++/pay.php";
 
+    public static final String CANCELORDER="server/Home/Order/api_cancelOrder";
+
+    public static final String CONFIRMORDER="server/Home/Order/api_ensureOrder";
+
+    public static final String COMPANYINFO="server/Home/My/apiget_basicdetail";
+
+    public static final String DUIBAURL="server/Home/User/api_getduibaurl";
+
+    public static final String BAGUORANK="getbaguorankcate.php";
+
     public static final String MyAddress="server/Home/User/api_getaddress";
 
     public static final String AddAddress="addaddress.php";

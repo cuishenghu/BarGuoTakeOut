@@ -92,6 +92,14 @@ public class HttpUtil {
         client.post(UrlContants.getUrl(UrlContants.PAY), params, handler);
     }
 
+    public static void cancelOrder(AsyncHttpResponseHandler handler, RequestParams params){
+        client.post(UrlContants.getUrl(UrlContants.CANCELORDER), params, handler);
+    }
+
+    public static void confirmOrder(AsyncHttpResponseHandler handler, RequestParams params){
+        client.post(UrlContants.getUrl(UrlContants.CONFIRMORDER), params, handler);
+    }
+
     /**
      * 获取指定城市的天气信息
      * @param code
@@ -122,11 +130,11 @@ public class HttpUtil {
     }
 
     public static void getOrderStatus(AsyncHttpResponseHandler handler,RequestParams params) {
-        client.post(UrlContants.getUrl(UrlContants.getUrl(UrlContants.ORDERDETAIL)),params,handler);
+        client.post(UrlContants.getUrl(UrlContants.ORDERDETAIL),params,handler);
     }
 
     public static void getCompanyInfo(AsyncHttpResponseHandler handler) {
-        client.post(UrlContants.getUrl(UrlContants.CompanyIno),handler);
+        client.post(UrlContants.getUrl(UrlContants.COMPANYINFO),handler);
     }
 
     public static void getMyAddress(AsyncHttpResponseHandler handler,RequestParams params) {
@@ -136,4 +144,14 @@ public class HttpUtil {
     public static void AddAddress(AsyncHttpResponseHandler handler,RequestParams params) {
         client.post(UrlContants.getUrl(UrlContants.AddAddress),params,handler);
     }
+
+    public static void getduibaurl(AsyncHttpResponseHandler handler,RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.DUIBAURL),params,handler);
+    }
+
+    public static void getbaguoRank(AsyncHttpResponseHandler handler,RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.BAGUORANK),params,handler);
+    }
+
+
 }

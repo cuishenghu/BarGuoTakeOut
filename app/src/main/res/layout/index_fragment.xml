@@ -172,6 +172,7 @@
         </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
+            android:id="@+id/tv_index_gift"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="58dp"
@@ -209,9 +210,45 @@
                 android:text="更多"
                 android:textSize="12sp"
                 android:textColor="#808080"
-               android:layout_toLeftOf="@id/iv_more"
-                />
-            </RelativeLayout>
+               android:layout_toLeftOf="@id/iv_more"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@mipmap/gift1"/>
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/line_gray"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/gift2"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/line_gray"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/gift3"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     </FrameLayout>
 </LinearLayout>

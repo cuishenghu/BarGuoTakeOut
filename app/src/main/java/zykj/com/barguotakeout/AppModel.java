@@ -15,10 +15,11 @@ public class AppModel {
     private String pwd;
     private String userid;
 
-    private  String address;
+    private String address;
+    private String baguobi;
 
-    private  double latitude=0.0f;
-    private  double longitude=0.0f;
+    private double latitude=0.0f;
+    private double longitude=0.0f;
     private static SharedPreferenceUtils utils;
 
     private String citycode;
@@ -53,6 +54,10 @@ public class AppModel {
             model.userid = utils.getUserid();
         }
 
+        if(!TextUtils.isEmpty(utils.getBaguobi())){
+            model.baguobi = utils.getBaguobi();
+        }
+
         return model;
     }
 
@@ -79,6 +84,13 @@ public class AppModel {
     public void setUserid(String userid){
         this.userid = userid;
         utils.setUserid(userid);
+    }
+
+    public String getBaguobi() { return baguobi; }
+
+    public void setBaguobi(String baguobi){
+        this.baguobi = baguobi;
+        utils.setBaguobi(baguobi);
     }
 
     public String getAddress() {

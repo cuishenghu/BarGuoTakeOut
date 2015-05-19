@@ -57,7 +57,7 @@ public class MyOrderActivity extends CommonActivity implements AdapterView.OnIte
             params=new RequestParams();
         }
         page=1;
-        params.add("username", Mapplication.getModel().getUsername());
+        params.add("userid", Mapplication.getModel().getUserid());
         params.put("num", NUM);
         params.put("page",page);
         HttpUtil.getAllOrder(new AsyncHttpResponseHandler() {
@@ -65,15 +65,14 @@ public class MyOrderActivity extends CommonActivity implements AdapterView.OnIte
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response=new String(responseBody);
                 JSONObject json = (JSONObject) JSON.parse(response);
-                if(json.getString("status").equals("1")){
+
                 JSONArray array=json.getJSONArray("data");
                 list = JSONArray.parseArray(array.toString(), Order.class);
                 AppLog.i("orderactivity",array.toJSONString());
                 adapter=new MyOderAdapter(MyOrderActivity.this, list);
                 lv_order.setAdapter(adapter);
-                page=page+1;}else{
-                    ToastUTil.shortT(MyOrderActivity.this,json.getString("msg"));
-                }
+                page=page+1;
+
                 if(lv_order.isRefreshing()){
                     lv_order.onRefreshComplete();
                 }
